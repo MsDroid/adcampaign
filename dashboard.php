@@ -1,12 +1,20 @@
 <?php 
 include 'constant-inc.php';
-
+$conn = connect();
 $site_url = base_url();
 // echo $site_url;
-
+$count = 0;
 if($_SESSION['name'] == ''){
 	redirect('sign-in.php');
 }
+
+if($_SESSION['role'] == 'CST'){
+	$user_id = $_SESSION['uid'];
+	$sql = "SELECT * From campaign WHERE uid = '$user_id'";
+	$query = mysqli_query($conn, $sql);
+	$count = mysqli_num_rows($query);
+}
+
 ?>
 
 		<?php include 'include/sidebar.php'; ?>
@@ -47,12 +55,12 @@ if($_SESSION['name'] == ''){
 								<div class="card-body py-4">
 									<div class="d-flex align-items-start">
 										<div class="flex-grow-1">
-											<h3 class="mb-2">$ 24.300</h3>
-											<p class="mb-2">Total Earnings</p>
-											<div class="mb-0">
+											<h3 class="mb-2"><?php echo $count; ?></h3>
+											<p class="mb-2">Total Campaign</p>
+											<!-- <div class="mb-0">
 												<span class="badge badge-soft-success me-2"> +5.35% </span>
 												<span class="text-muted">Since last week</span>
-											</div>
+											</div> -->
 										</div>
 										<div class="d-inline-block ms-3">
 											<div class="stat">
@@ -63,6 +71,9 @@ if($_SESSION['name'] == ''){
 								</div>
 							</div>
 						</div>
+
+					<?php if($_SESSION['role'] == 'ADM'){ ?>
+
 						<div class="col-12 col-sm-6 col-xxl-3 d-flex">
 							<div class="card flex-fill">
 								<div class="card-body py-4">
@@ -84,6 +95,8 @@ if($_SESSION['name'] == ''){
 								</div>
 							</div>
 						</div>
+
+
 						<div class="col-12 col-sm-6 col-xxl-3 d-flex">
 							<div class="card flex-fill">
 								<div class="card-body py-4">
@@ -107,12 +120,12 @@ if($_SESSION['name'] == ''){
 						</div>
 					</div>
 
-					
+					<?php } ?>
 
 					<div class="card flex-fill">
 						<div class="card-header">
 							<div class="card-actions float-end">
-								<div class="dropdown position-relative">
+								<!-- <div class="dropdown position-relative">
 									<a href="#" data-bs-toggle="dropdown" data-bs-display="static">
 										<i class="align-middle" data-feather="more-horizontal"></i>
 									</a>
@@ -122,7 +135,7 @@ if($_SESSION['name'] == ''){
 										<a class="dropdown-item" href="#">Another action</a>
 										<a class="dropdown-item" href="#">Something else here</a>
 									</div>
-								</div>
+								</div> -->
 							</div>
 							<h5 class="card-title mb-0">Latest Projects</h5>
 						</div>

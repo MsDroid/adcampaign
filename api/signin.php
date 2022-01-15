@@ -10,7 +10,7 @@ $query = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($query) > 0){
     $row = mysqli_fetch_assoc($query);
-    $_SESSION['uid'] = $row['id'];
+    $_SESSION['uid'] = $row['uid'];
     $_SESSION['name'] = $row['name'];
     $_SESSION['role'] = $row['role'];
     echo "true";

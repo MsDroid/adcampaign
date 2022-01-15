@@ -36,7 +36,7 @@ if($_SESSION['name'] == ''){
                                 <li>Email support</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy Now</button>
+                            <a href="thankyou.php?plan=free&price=0" type="button" class="w-100 btn btn-lg btn-outline-primary">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ if($_SESSION['name'] == ''){
                                 <li>Priority email support</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Buy Now</button>
+                            <a href="thankyou.php?plan=pro&price=15" type="button" class="w-100 btn btn-lg btn-primary">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ if($_SESSION['name'] == ''){
                                 <li>Phone and email support</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Buy Now</button>
+                            <a href="thankyou.php?plan=enterprise&price=29" type="button" class="w-100 btn btn-lg btn-primary">Buy Now</a>
                         </div>
                     </div>
                 </div>

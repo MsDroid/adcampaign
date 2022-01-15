@@ -83,9 +83,11 @@
 							<li class="sidebar-item">
 								<a class="sidebar-link" href="dashboard.php">Campaign</a>
 							</li>
+							<?php if($_SESSION['role'] == 'CST'){ ?>
 							<li class="sidebar-item">
 								<a class="sidebar-link" href="add-campaign.php">Create Campaign</a>
 							</li>
+							<?php } ?>
 							<!-- <li class="sidebar-item">
 								<a class="sidebar-link" href="pages-settings.html">Settings</a>
 							</li>
