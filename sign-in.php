@@ -2,7 +2,8 @@
 include 'constant-inc.php';
 
 $site_url = base_url();
-// echo $site_url;
+$conn = connect();
+ 
 ?>
 
 
@@ -73,20 +74,22 @@ $site_url = base_url();
 											<img src="<?php echo $site_url;?>img/avatars/avatar.jpg" alt="Chris Wood"
 												class="img-fluid rounded-circle" width="132" height="132" />
 										</div>
-										<form>
+										<form id="signin-form" action="">
 											<div class="mb-3">
 												<label class="form-label">Email</label>
 												<input class="form-control form-control-lg" type="email" name="email"
-													placeholder="Enter your email" />
+													placeholder="Enter your email" id="email" />
 											</div>
+											
 											<div class="mb-3">
 												<label class="form-label">Password</label>
 												<input class="form-control form-control-lg" type="password"
-													name="password" placeholder="Enter your password" />
+													name="password" placeholder="Enter your password" id="password" />
 												<small>
-													<a href="pages-reset-password.html">Forgot password?</a>
+													<a href="">Forgot password?</a>
 												</small>
 											</div>
+											
 											<div>
 												<div class="form-check align-items-center">
 													<input id="customControlInline" type="checkbox"
@@ -96,10 +99,11 @@ $site_url = base_url();
 														for="customControlInline">Remember me next time</label>
 												</div>
 											</div>
+											
 											<div class="text-center mt-3">
-												<a href="dashboard-default.html" class="btn btn-lg btn-primary">Sign
-													in</a>
-												<!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
+												<!-- <a href="" class="btn btn-lg btn-primary" id="signin" type="" Sign -->
+													<!-- in</a> -->
+												<button type="submit" class="btn btn-lg btn-primary" id="signin">Sign in</button>
 											</div>
 										</form>
 									</div>
@@ -114,8 +118,36 @@ $site_url = base_url();
 	</div>
 
 	<script src="<?php echo $site_url;?>js/app.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$("#signin-form").submit(function(e){
+			e.preventDefault();
+  			// alert("Submitted");
+			let email = $("#email").val();
+			let pass = $("#password").val();
 
+			if(email != '' && pass != ''){
+				let dataString = "email=" + email + "&pass=" + pass;
+				// ajax call
+				$.ajax({
+					url: "api/signin.php",
+					method : "post",
+					data : dataString,
+					success:function(r){
+						if(r == 'true'){
+							window.location.href = "dashboard.php";
+						}else if(r == 'false'){
+							alert("Please enter correct details !!");
+						}
+					}
+				})
+			}else{
+				alert("Please Fill the details !!");
+			}
+		});
+	</script>
 </body>
+
 
 
 </html>
