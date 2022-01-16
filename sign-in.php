@@ -135,6 +135,7 @@ $conn = connect();
 					data : dataString,
 					success:function(r){
 						if(r == 'true'){
+							alert("Successfully Login!")
 							window.location.href = "dashboard.php";
 						}else if(r == 'false'){
 							alert("Please enter correct details !!");
