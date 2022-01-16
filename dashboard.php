@@ -78,15 +78,19 @@ if($_SESSION['role'] == 'ADM'){
 							</div>
 						</div>
 
-					<?php if($_SESSION['role'] == 'ADM'){ ?>
+					<?php if($_SESSION['role'] == 'ADM'){ 
+						$cam_sql = "SELECT * FROM campaign where status = '0'";
+						$cam_query = mysqli_query($conn, $cam_sql);
+						$cam_count = mysqli_num_rows($cam_query);
+						?>
 
 						<div class="col-12 col-sm-6 col-xxl-3 d-flex">
 							<div class="card flex-fill">
 								<div class="card-body py-4">
 									<div class="d-flex align-items-start">
 										<div class="flex-grow-1">
-											<h3 class="mb-2">43</h3>
-											<p class="mb-2">Pending Orders</p>
+											<h3 class="mb-2"><?php echo $cam_count; ?></h3>
+											<p class="mb-2">Pending Campaigns</p>
 											<div class="mb-0">
 												<span class="badge badge-soft-danger me-2"> -4.25% </span>
 												<span class="text-muted">Since last week</span>
@@ -153,6 +157,12 @@ if($_SESSION['role'] == 'ADM'){
 									<th class="d-none d-xl-table-cell">Link</th>
 									<th>Status</th>
 									<th class="d-none d-md-table-cell">User</th>
+									<?php 
+									if($_SESSION['role'] == 'ADM'){ ?>
+										<th class="d-none d-md-table-cell">Action</th>
+									<?php }
+									?>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -186,8 +196,31 @@ if($_SESSION['role'] == 'ADM'){
 												?>
 												
 												<td class="d-none d-xl-table-cell"><?php echo $row['link']; ?></td>
-												<td><span class="badge bg-success"><?php echo $row['status']; ?></span></td>
-												<td class="d-none d-md-table-cell"><?php echo $row['uid']; ?></td>
+
+												<?php 
+												if($row['status'] == '1'){ ?>
+													<td><span class="badge bg-success">Active</span></td>	
+												<?php } else if($row['status'] == '0') { ?>
+													<td><span class="badge bg-warning">Pending</span></td>	
+												<?php } ?>
+												
+												
+												<?php 
+													$user = $row['uid'];
+													$u_sql = "SELECT * FROM users where uid='$user'";
+													$u_query = mysqli_query($conn, $u_sql);
+													$u_row = mysqli_fetch_assoc($u_query);
+												?>
+												
+												<td class="d-none d-md-table-cell"><?php echo $u_row['name']; ?></td>
+
+												<?php 
+												if($_SESSION['role'] == 'ADM'){
+												if($row['status'] == '0'){ ?>
+													<td><span class="btn btn-success"><a href="api/status.php?type=active&id=<?php echo $row['id']; ?>" style="text-decoration:none;color:white;">Active</a></span></td>	
+												<?php } else if($row['status'] == '1') { ?>
+													<td><span class="btn btn-danger"><a href="api/status.php?type=deactive&id=<?php echo $row['id']; ?>" style="text-decoration:none;color:white;">Inactive</a></span></td>	
+												<?php } } ?>
 											</tr>
 										<?php	
 										}

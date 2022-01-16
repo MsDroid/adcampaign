@@ -3,7 +3,7 @@ include '../constant-inc.php';
 $conn = connect();
 
 $email = $_POST['email'];
-$pass = $_POST['pass'];
+$pass = md5($_POST['pass']);
 
 $sql = "SELECT * FROM USERS WHERE email = '$email' and password = '$pass'";
 $query = mysqli_query($conn, $sql);

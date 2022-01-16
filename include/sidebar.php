@@ -16,13 +16,8 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
 
-	<!-- Choose your prefered color scheme -->
-	<!-- <link href="css/light.css" rel="stylesheet"> -->
-	<!-- <link href="css/dark.css" rel="stylesheet"> -->
-
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-	<!-- BEGIN SETTINGS -->
-	<!-- Remove this after purchasing -->
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+	
 	<link class="js-stylesheet" href="<?php echo $site_url;?>css/light.css" rel="stylesheet">
 	<script src="<?php echo $site_url;?>js/settings.js"></script>
 	<!-- END SETTINGS -->

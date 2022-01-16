@@ -71,7 +71,7 @@ $conn = connect();
 								<div class="card-body">
 									<div class="m-sm-4">
 										<div class="text-center">
-											<img src="<?php echo $site_url;?>img/avatars/avatar.jpg" alt="Chris Wood"
+											<img src="<?php echo $site_url;?>img/avatars/ad_logo.jpg" alt="Chris Wood"
 												class="img-fluid rounded-circle" width="132" height="132" />
 										</div>
 										<form id="signin-form" action="">
@@ -101,9 +101,9 @@ $conn = connect();
 											</div>
 											
 											<div class="text-center mt-3">
-												<!-- <a href="" class="btn btn-lg btn-primary" id="signin" type="" Sign -->
-													<!-- in</a> -->
-												<button type="submit" class="btn btn-lg btn-primary" id="signin">Sign in</button>
+												<a href="sign-up.php" class="btn btn-lg btn-primary"  >Sign
+													up</a>
+												<button type="submit" class="btn btn-lg btn-success" id="signin">Sign in</button>
 											</div>
 										</form>
 									</div>
