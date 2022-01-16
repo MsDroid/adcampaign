@@ -15,6 +15,12 @@ if($_SESSION['role'] == 'CST'){
 	$count = mysqli_num_rows($query);
 }
 
+if($_SESSION['role'] == 'ADM'){
+	$sql = "SELECT * From campaign";
+	$query = mysqli_query($conn, $sql);
+	$count = mysqli_num_rows($query);
+}
+
 ?>
 
 		<?php include 'include/sidebar.php'; ?>
@@ -153,10 +159,10 @@ if($_SESSION['role'] == 'CST'){
 								<?php 
 									$user_role =$_SESSION['role'];
 									if($user_role == 'ADM'){
-										$c_sql = "SELECT * FROM campaign";
+										$c_sql = "SELECT * FROM campaign order by id DESC";
 									}elseif($user_role == 'CST'){
 										$uid = $_SESSION['uid'];
-										$c_sql = "SELECT * FROM campaign where uid = '$uid'";
+										$c_sql = "SELECT * FROM campaign where uid = '$uid' order by id ASC" ;
 									}
 									
 									$query = mysqli_query($conn, $c_sql);
@@ -165,11 +171,23 @@ if($_SESSION['role'] == 'CST'){
 									if($count > 0){
 										while($row = mysqli_fetch_assoc($query)){ ?>
 											<tr>
-												<td><?php echo $row['title'] ?></td>
-												<td class="d-none d-xl-table-cell">01/01/2021</td>
-												<td class="d-none d-xl-table-cell">31/06/2021</td>
-												<td><span class="badge bg-success">Done</span></td>
-												<td class="d-none d-md-table-cell">Carl Jenkins</td>
+												<td style="text-transform:capitalize;"><?php echo $row['title']; ?></td>
+												
+												<?php 
+													$mno = $row['media_no'];
+													$img_sql = "SELECT * from cover_media where media_number = '$mno'";
+													$img_query = mysqli_query($conn, $img_sql);
+
+													if(mysqli_num_rows($img_query) > 0){ $row2=mysqli_fetch_assoc($img_query);?>
+														<td class="d-none d-xl-table-cell"><img src="media/<?php echo $row2['file_name']; ?>" width="100" height="70" /></td>		
+													<?php }else{ ?>
+														<td class="d-none d-xl-table-cell"><img src="drop.png" width="100" height="70" /></td>		
+												<?php	}
+												?>
+												
+												<td class="d-none d-xl-table-cell"><?php echo $row['link']; ?></td>
+												<td><span class="badge bg-success"><?php echo $row['status']; ?></span></td>
+												<td class="d-none d-md-table-cell"><?php echo $row['uid']; ?></td>
 											</tr>
 										<?php	
 										}

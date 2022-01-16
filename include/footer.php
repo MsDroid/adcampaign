@@ -19,7 +19,7 @@
 						</div>
 						<div class="col-6 text-end">
 							<p class="mb-0">
-								&copy; 2021 - <a href="index.html" class="text-muted">AppStack</a>
+								&copy; 2022 - <a href="https://thecybertize.com/" class="text-muted">TheCybertize</a>
 							</p>
 						</div>
 					</div>
