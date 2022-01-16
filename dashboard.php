@@ -137,82 +137,45 @@ if($_SESSION['role'] == 'CST'){
 									</div>
 								</div> -->
 							</div>
-							<h5 class="card-title mb-0">Latest Projects</h5>
+							<h5 class="card-title mb-0">Latest Campaign</h5>
 						</div>
 						<table id="datatables-dashboard-projects" class="table table-striped my-0">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th class="d-none d-xl-table-cell">Start Date</th>
-									<th class="d-none d-xl-table-cell">End Date</th>
+									<th>Title</th>
+									<th class="d-none d-xl-table-cell">Image</th>
+									<th class="d-none d-xl-table-cell">Link</th>
 									<th>Status</th>
-									<th class="d-none d-md-table-cell">Assignee</th>
+									<th class="d-none d-md-table-cell">User</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Project Apollo</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-success">Done</span></td>
-									<td class="d-none d-md-table-cell">Carl Jenkins</td>
-								</tr>
-								<tr>
-									<td>Project Fireball</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-danger">Cancelled</span></td>
-									<td class="d-none d-md-table-cell">Bertha Martin</td>
-								</tr>
-								<tr>
-									<td>Project Hades</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-success">Done</span></td>
-									<td class="d-none d-md-table-cell">Stacie Hall</td>
-								</tr>
-								<tr>
-									<td>Project Nitro</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-warning">In progress</span></td>
-									<td class="d-none d-md-table-cell">Carl Jenkins</td>
-								</tr>
-								<tr>
-									<td>Project Phoenix</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-success">Done</span></td>
-									<td class="d-none d-md-table-cell">Bertha Martin</td>
-								</tr>
-								<tr>
-									<td>Project X</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-success">Done</span></td>
-									<td class="d-none d-md-table-cell">Stacie Hall</td>
-								</tr>
-								<tr>
-									<td>Project Romeo</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-success">Done</span></td>
-									<td class="d-none d-md-table-cell">Ashley Briggs</td>
-								</tr>
-								<tr>
-									<td>Project Wombat</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-warning">In progress</span></td>
-									<td class="d-none d-md-table-cell">Bertha Martin</td>
-								</tr>
-								<tr>
-									<td>Project Zircon</td>
-									<td class="d-none d-xl-table-cell">01/01/2021</td>
-									<td class="d-none d-xl-table-cell">31/06/2021</td>
-									<td><span class="badge bg-danger">Cancelled</span></td>
-									<td class="d-none d-md-table-cell">Stacie Hall</td>
-								</tr>
+								<?php 
+									$user_role =$_SESSION['role'];
+									if($user_role == 'ADM'){
+										$c_sql = "SELECT * FROM campaign";
+									}elseif($user_role == 'CST'){
+										$uid = $_SESSION['uid'];
+										$c_sql = "SELECT * FROM campaign where uid = '$uid'";
+									}
+									
+									$query = mysqli_query($conn, $c_sql);
+									$count = mysqli_num_rows($query);
+
+									if($count > 0){
+										while($row = mysqli_fetch_assoc($query)){ ?>
+											<tr>
+												<td><?php echo $row['title'] ?></td>
+												<td class="d-none d-xl-table-cell">01/01/2021</td>
+												<td class="d-none d-xl-table-cell">31/06/2021</td>
+												<td><span class="badge bg-success">Done</span></td>
+												<td class="d-none d-md-table-cell">Carl Jenkins</td>
+											</tr>
+										<?php	
+										}
+									}
+								?>
+								
 							</tbody>
 						</table>
 					</div>
